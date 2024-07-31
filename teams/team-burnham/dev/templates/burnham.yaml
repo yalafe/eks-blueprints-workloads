@@ -36,7 +36,7 @@ spec:
 {{ if .Values.spec.ingress.host }}
   - host: burnham.{{ .Values.spec.ingress.host }}
 {{ else }}
-  - host: eks-blueprint-blue
+  - host: 
 {{ end }}
     http:
       paths:
