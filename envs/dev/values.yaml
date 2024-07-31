@@ -13,7 +13,7 @@ spec:
 
   # Thoses default values can be surcharged by Infrastructure as Code
   env: dev
-  clusterName: eks-blueprint-blue # the name of EKS cluster
+  clusterName: eks-blueprint-cluster # the name of EKS cluster
   blueprint: 'terraform' # cdk | terraform
   karpenterInstanceProfile:
   ingress:
