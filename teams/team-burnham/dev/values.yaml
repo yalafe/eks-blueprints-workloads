@@ -4,5 +4,5 @@ labels:
 spec:
   env:
   ingress:
-    host:
+    host: eks-blueprint-blue
     type: alb
