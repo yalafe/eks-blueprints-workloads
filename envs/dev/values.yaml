@@ -18,4 +18,4 @@ spec:
   karpenterInstanceProfile:
   ingress:
     type: 'alb' # nginx | alb
-    host: yalfegha.com
+    host: # domain
