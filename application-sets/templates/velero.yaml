@@ -38,7 +38,8 @@ spec:
               serviceAccount:
                 server:
                   annotations:
-                    eks.amazonaws.com/role-arn: arn:aws:iam::{{"{{"}}metadata.labels.aws-account-id{{"}}"}}:role/{{"{{"}}name{{"}}"}}-velero 
+            #eks.amazonaws.com/role-arn: arn:aws:iam::{{"{{"}}metadata.labels.aws-account-id{{"}}"}}:role/{{"{{"}}name{{"}}"}}-velero 
+                    eks.amazonaws.com/role-arn: arn:aws:iam::896781037232:role/eks-blueprint-blue-cluster-20240801120246703800000004
       syncPolicy:
         automated:
           prune: true
