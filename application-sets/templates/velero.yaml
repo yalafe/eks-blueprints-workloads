@@ -24,7 +24,7 @@ spec:
       project: default
       source:
         # used for defining velero helm chart configurattion
-        path: envs/velero
+        path: envs/dev
         # Change repoURL with your argocd repo
         repoURL: "git@github.com:yalafe/eks-blueprints-workload"
         targetRevision: HEAD
