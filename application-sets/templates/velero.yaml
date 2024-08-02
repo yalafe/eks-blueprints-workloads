@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: velero-stack
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: true
+  generators:
+  - clusters:
+      selector:
+        matchExpressions:
+        - key: environment
+          operator: In
+          values: 
+            - "development"
+  template:
+    metadata:
+      name: '{{"{{"}}name{{"}}"}}-velero'
+      namespace: argocd
+    spec:
+      destination:
+        name: '{{"{{"}}name{{"}}"}}'
+        namespace: velero
+      project: default
+      source:
+        # used for defining velero helm chart configurattion
+        path: apps/velero
+        # Change repoURL with your argocd repo
+        repoURL: https://github.com/your-org/your-repo.git
+        targetRevision: HEAD
+        helm:
+          # Define helm file based on env: 
+          valueFiles:
+            - 'values-{{"{{"}}name{{"}}"}}.yaml'
+          # Annotating velero serviceaccount with IAM-role
+          values: |
+            velero:
+              serviceAccount:
+                server:
+                  annotations:
+                    eks.amazonaws.com/role-arn: arn:aws:iam::{{"{{"}}metadata.labels.aws-account-id{{"}}"}}:role/{{"{{"}}name{{"}}"}}-velero 
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
