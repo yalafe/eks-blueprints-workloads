@@ -19,3 +19,36 @@ spec:
   ingress:
     type: 'alb' # nginx | alb
     host: eks-blueprint.yalfegha.com # empty or your domain like dev.example.com
+##NEW YALA
+velero:
+  configuration:
+    backupStorageLocation:
+    - name: dev-k8s-velero
+      provider: aws
+      bucket: development-test-velero
+      prefix: development
+      default: true
+      config: 
+        region: ap-northeast-2
+    volumeSnapshotLocation:
+    - name: dev-k8s-velero-snapshot
+      provider: aws
+      config:
+        region: ap-northeast-2
+  # same service-account which we created in above irsa step
+  serviceAccount:
+    server:
+      name: velero
+  credentials:
+    # set this to false because we are using irsa based access
+    useSecret: false
+  # This is required for providing correct permissions to k8s cluster
+  podSecurityContext:
+    fsGroup: 65534  
+  initContainers:
+    - name: velero-plugin-for-aws
+      image: velero/velero-plugin-for-aws:v1.7.0
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+        - mountPath: /target
+          name: plugins
