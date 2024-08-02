@@ -28,6 +28,14 @@ spec:
       values:
         replicas: "3"
         project: {{"'{{metadata.annotations.project}}'"}}
+  ##NEW YALA
+  - clusters:
+      selector:
+        matchExpressions:
+        - key: environment
+          operator: In
+          values: 
+            - "development"
   template:
     metadata:
       name: {{"'{{name}}-guestbook'"}}
