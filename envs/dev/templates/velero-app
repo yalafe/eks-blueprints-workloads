@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: velero-app
+
+spec:
+  project: default 
+  destination:
+    namespace: velero
+    server: {{ .Values.spec.destination.server }}
+  source:
+    repoURL: 'https://vmware-tanzu.github.io/helm-charts/'
+    targetRevision: 7.1.4
+    chart: velero
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
