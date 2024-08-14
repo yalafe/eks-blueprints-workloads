@@ -1,0 +1,13 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  provider: aws
+  objectStorage:
+    bucket: <your-s3-bucket-name>  # Replace with your S3 bucket name
+  config:
+    region: <your-aws-region>  # Replace with your AWS region
+    s3ForcePathStyle: "true"
+    s3Url: <your-s3-url>  # Replace with your S3 URL if using a custom endpoint
