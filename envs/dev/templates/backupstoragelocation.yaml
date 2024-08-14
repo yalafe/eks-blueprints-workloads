@@ -6,8 +6,8 @@ metadata:
 spec:
   provider: aws
   objectStorage:
-    bucket: <your-s3-bucket-name>  # Replace with your S3 bucket name
+    bucket: arn:aws:s3:::bucket-s3-terraform-bucket # Replace with your S3 bucket name
   config:
-    region: <your-aws-region>  # Replace with your AWS region
+    region: ap-northeast-2  # Replace with your AWS region
     s3ForcePathStyle: "true"
-    s3Url: <your-s3-url>  # Replace with your S3 URL if using a custom endpoint
+    #s3Url: <your-s3-url>  # Replace with your S3 URL if using a custom endpoint
