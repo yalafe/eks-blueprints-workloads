@@ -34,9 +34,9 @@ spec:
     #s3Url: <your-s3-url>  # Replace with your S3 URL if using a custom endpoint
 
 apiVersion: velero.io/v1
-kind: snapshotvelero
+kind: VolumeSnapshotLocation
 metadata:
-  name: VolumeSnapshotLocation
+  name: snapshotvelero
   namespace: velero
 spec:
   provider: aws
