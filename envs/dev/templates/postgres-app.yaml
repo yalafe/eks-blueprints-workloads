@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: postgres-app
-  namespace: argocd
+  namespace: postgres
 spec:
   project: default
   source:
