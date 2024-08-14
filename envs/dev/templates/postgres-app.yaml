@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/yalafe/terraform-aws-eks-blueprints'  # Replace with your repo URL
     targetRevision: HEAD
-    path: patterns/blue-green-upgrade/postgresql  # Replace with the correct path
+    path: patterns/blue-green-upgrade/modules/eks_cluster  # Replace with the correct path
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: postgres
