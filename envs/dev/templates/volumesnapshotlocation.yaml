@@ -6,4 +6,4 @@ metadata:
 spec:
   provider: aws
   config:
-    region: <your-aws-region>  # Replace with your AWS region
+    region: ap-northeast-2  # Replace with your AWS region
