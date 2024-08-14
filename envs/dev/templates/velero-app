@@ -32,3 +32,13 @@ spec:
     s3ForcePathStyle: "true"
     #s3Url: <your-s3-url>  # Replace with your S3 URL if using a custom endpoint
 
+apiVersion: velero.io/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  provider: aws
+  config:
+    region: ap-northeast-2  # Replace with your AWS region
+
