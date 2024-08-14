@@ -22,7 +22,7 @@ spec:
 apiVersion: velero.io/v1
 kind: BackupStorageLocation
 metadata:
-  name: BackupStorageLocation
+  name: backupvelero
   namespace: velero
 spec:
   provider: aws
@@ -34,7 +34,7 @@ spec:
     #s3Url: <your-s3-url>  # Replace with your S3 URL if using a custom endpoint
 
 apiVersion: velero.io/v1
-kind: VolumeSnapshotLocation
+kind: snapshotvelero
 metadata:
   name: VolumeSnapshotLocation
   namespace: velero
