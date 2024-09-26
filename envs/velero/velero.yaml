@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: velero
+spec:
+  destination:
+    name: ''
+    namespace: velero
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ''
+    repoURL: 'https://vmware-tanzu.github.io/helm-charts'
+    targetRevision: 7.1.5
+    chart: velero
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
