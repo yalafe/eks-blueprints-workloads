@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: 7.1.5
+    repoURL: https://charts.velero.io
+    targetRevision: 2.32.0
     chart: velero
     helm:
       values: |
