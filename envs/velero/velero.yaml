@@ -2,16 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: velero
+  namespace: velero
 spec:
   project: default
-  sources:
-    path: ''
-    repoURL: 'https://vmware-tanzu.github.io/helm-charts'
+  source:
+    repoURL: https://vmware-tanzu.github.io/helm-charts
     targetRevision: 7.1.5
     chart: velero
     helm:
       values: |
-      # Storage settings (for AWS S3)
+        # Velero Configuration for S3 Backup
         configuration:
           provider: aws
           backupStorageLocation:
@@ -25,25 +25,21 @@ spec:
             provider: aws
             config:
               region: ap-northeast-2
-        # Velero schedules for backups
+        # Velero schedule for hourly backups
         schedules:
           hourly-backup:
-            schedule: "0 * * * *"  # Runs every hour at the start of the hour
+            schedule: "0 * * * *"  # Every hour at the start of the hour
             template:
-              ttl: "72h"  # Backups older than 72 hours will be deleted
+              ttl: "72h"  # Keep backups for 72 hours
               includedNamespaces:
                 - "*"
               snapshotVolumes: true
-    destination:
-      #name: ''
-      namespace: velero
-      server: 'https://kubernetes.default.svc'
-    #sources: []
-    #project: default
-    syncPolicy:
-      automated:
-        prune: false
-        selfHeal: false
-      syncOptions:
-        - CreateNamespace=true
-  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: velero
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 3
