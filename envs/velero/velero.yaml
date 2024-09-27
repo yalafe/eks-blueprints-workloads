@@ -13,7 +13,7 @@ spec:
     targetRevision: 7.1.5
     chart: velero
     helm:
-    parameters:
+    values:
       - name: 'configuration.backupStorageLocation[0].bucket'
         value: velero-backup-blue
       - name: 'configuration.backupStorageLocation[0].provider'
