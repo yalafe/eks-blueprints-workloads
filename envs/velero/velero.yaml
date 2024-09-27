@@ -4,7 +4,7 @@ metadata:
   name: velero
 spec:
   project: default
-  sources: []
+  sources:
     path: ''
     repoURL: 'https://vmware-tanzu.github.io/helm-charts'
     targetRevision: 7.1.5
@@ -35,7 +35,7 @@ spec:
                 - "*"
               snapshotVolumes: true
     destination:
-      name: ''
+      #name: ''
       namespace: velero
       server: 'https://kubernetes.default.svc'
     #sources: []
