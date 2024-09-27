@@ -12,22 +12,6 @@ spec:
     repoURL: 'https://vmware-tanzu.github.io/helm-charts'
     targetRevision: 7.1.5
     chart: velero
-    helm:
-    values:
-      - name: 'configuration.backupStorageLocation[0].bucket'
-        value: velero-backup-blue
-      - name: 'configuration.backupStorageLocation[0].provider'
-        value: aws
-      - name: 'configuration.backupStorageLocation[0].name'
-        value: default
-      - name: 'configuration.backupStorageLocation[0].prefix'
-        value: backups
-      - name: 'configuration.volumeSnapshotLocation[0].name'
-        value: default
-      - name: 'configuration.volumeSnapshotLocation[0].provider'
-        value: aws
-      - name: configuration.backupSyncPeriod
-        value: '*'
   sources: []
   project: default
   syncPolicy:
