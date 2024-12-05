@@ -18,6 +18,7 @@ spec:
           - mountPath: /target
             name: plugins
         configuration:
+          logLevel: debug
           backupStorageLocations:
           - name: default
             provider: aws
