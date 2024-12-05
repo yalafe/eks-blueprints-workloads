@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: velero
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://vmware-tanzu.github.io/helm-charts
+    chart: velero
+    targetRevision: 2.41.0
+    helm:
+      values: |
+        configuration:
+          provider: aws
+          backupStorageLocation:
+            name: default
+            bucket: arn:aws:s3:::velero-backup-bucket-dlmrnkp4  # Replace with Terraform output or Helm template variable
+            config:
+              region: eu-central-1           # Replace with your AWS region
+          volumeSnapshotLocation:
+            name: default
+            config:
+              region: eu-central-1
+        serviceAccount:
+          server:
+            annotations:
+              eks.amazonaws.com/arn:aws:iam::896781037232:role/velero-role-dlmrnkp4  # Replace with Terraform output or Helm template variable
+  destination:
+    namespace: velero
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
