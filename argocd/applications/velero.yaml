@@ -34,7 +34,7 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    hooks:
+  hooks:
   - kind: Namespace
     apiVersion: v1
     metadata:
