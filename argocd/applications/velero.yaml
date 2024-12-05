@@ -11,6 +11,12 @@ spec:
     targetRevision: 8.0.0
     helm:
       values: |
+        initContainers:
+        - name: velero-plugin-for-aws
+          image: velero/velero-plugin-for-aws:v1.6.0
+          volumeMounts:
+          - mountPath: /target
+            name: plugins
         configuration:
           backupStorageLocations:
           - name: default
@@ -18,6 +24,7 @@ spec:
             bucket: arn:aws:s3:::velero-backup-bucket-dlmrnkp4 # Replace with your S3 bucket name
             config:
               region: eu-central-1 # Replace with your AWS region
+              prefix: velero-backups
           volumeSnapshotLocations:
           - name: default
             provider: aws
