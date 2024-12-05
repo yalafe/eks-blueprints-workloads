@@ -15,18 +15,18 @@ spec:
           backupStorageLocations:
           - name: default
             provider: aws
-            bucket: <VELERO_BUCKET> # Replace with your S3 bucket name
+            bucket: arn:aws:s3:::velero-backup-bucket-dlmrnkp4 # Replace with your S3 bucket name
             config:
-              region: <AWS_REGION> # Replace with your AWS region
+              region: eu-central-1 # Replace with your AWS region
           volumeSnapshotLocations:
           - name: default
             provider: aws
             config:
-              region: <AWS_REGION> # Replace with your AWS region
+              region: eu-central-1 # Replace with your AWS region
         serviceAccount:
           server:
             annotations:
-              eks.amazonaws.com/arn:aws:iam::896781037232:role/velero-role-dlmrnkp4  # Replace with Terraform output or Helm template variable
+              eks.amazonaws.com/role-arn: arn:aws:iam::896781037232:role/velero-role-dlmrnkp4  # Replace with Terraform output or Helm template variable
   destination:
     namespace: velero
     server: https://kubernetes.default.svc
