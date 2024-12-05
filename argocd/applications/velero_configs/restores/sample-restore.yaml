@@ -1,0 +1,7 @@
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: sample-restore
+  namespace: velero
+spec:
+  backupName: daily-backup
