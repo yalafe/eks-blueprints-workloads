@@ -34,3 +34,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    hooks:
+  - kind: Namespace
+    apiVersion: v1
+    metadata:
+      name: velero
