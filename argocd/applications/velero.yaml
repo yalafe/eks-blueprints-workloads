@@ -39,3 +39,4 @@ spec:
     apiVersion: v1
     metadata:
       name: velero
+    operation: PreSync
