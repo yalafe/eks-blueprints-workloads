@@ -22,7 +22,7 @@ spec:
           backupStorageLocations:
           - name: default
             provider: aws
-            bucket: arn:aws:s3:::velero-backup-bucket-dlmrnkp4 # Replace with your S3 bucket name
+            bucket: velero-backup-bucket-dlmrnkp4 # Replace with your S3 bucket name
             config:
               region: eu-central-1 # Replace with your AWS region
               prefix: velero-backups
