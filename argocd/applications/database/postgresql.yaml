@@ -18,16 +18,15 @@ spec:
           database: mydatabase
 
         primary:
-            persistence:
-              enabled: true
-              size: 10Gi
-              storageClass: gp2
           extraEnvVars:
             - name: PGCRON_SCHEDULE
               value: "* * * * *"
             - name: PGCRON_COMMAND
               value: "INSERT INTO mytable (content) VALUES ('Row created at ' || NOW());"
-
+        persistence:
+          enabled: true
+          size: 10Gi
+          storageClass: gp2
         initdbScriptsConfigMap: postgresql-init
   destination:
     namespace: database
