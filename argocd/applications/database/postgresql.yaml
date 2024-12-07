@@ -18,6 +18,10 @@ spec:
           database: mydatabase
 
         primary:
+            persistence:
+              enabled: true
+              size: 10Gi
+              storageClass: gp2
           extraEnvVars:
             - name: PGCRON_SCHEDULE
               value: "* * * * *"
