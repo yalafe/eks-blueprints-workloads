@@ -23,7 +23,7 @@ spec:
           - name: default
             namespace: velero
             provider: aws # Corrected provider
-            bucket: velero-backup-bucket-dlmrnkp4 # Ensure bucket name matches the actual bucket in AWS
+            bucket: velero-backup-bucket-bkuawlz6 # Ensure bucket name matches the actual bucket in AWS
             config:
               region: eu-central-1 # Ensure the AWS region is correct
               prefix: velero-backups
@@ -36,7 +36,7 @@ spec:
         serviceAccount:
           server:
             annotations:
-              eks.amazonaws.com/role-arn: arn:aws:iam::896781037232:role/velero-server-role-dlmrnkp4
+              eks.amazonaws.com/role-arn: arn:aws:iam::896781037232:role/velero-server-role-bkuawlz6
   destination:
     namespace: velero
     server: https://kubernetes.default.svc
