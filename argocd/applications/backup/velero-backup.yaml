@@ -23,7 +23,7 @@ metadata:
   name: hourly-backup
   namespace: velero
 spec:
-  schedule: "0 * * * *"
+  schedule: "*/3 * * * *"
   template:
     includedNamespaces:
     - database
