@@ -21,6 +21,7 @@ spec:
           logLevel: debug
           backupStorageLocations:
           - name: default
+            namespace: velero
             provider: aws # Corrected provider
             bucket: velero-backup-bucket-dlmrnkp4 # Ensure bucket name matches the actual bucket in AWS
             config:
@@ -28,6 +29,7 @@ spec:
               prefix: velero-backups
           volumeSnapshotLocations:
           - name: default
+            namespace: velero
             provider: aws # Corrected provider
             config:
               region: eu-central-1
