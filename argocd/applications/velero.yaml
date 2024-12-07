@@ -34,7 +34,7 @@ spec:
         serviceAccount:
           server:
             annotations:
-              eks.amazonaws.com/role-arn: arn:aws:iam::896781037232:role/velero-role-dlmrnkp4  # Replace with Terraform output or Helm template variable
+              eks.amazonaws.com/role-arn: arn:aws:iam::896781037232:role/velero-server-role-dlmrnkp4  # Replace with Terraform output or Helm template variable
   destination:
     namespace: velero
     server: https://kubernetes.default.svc
