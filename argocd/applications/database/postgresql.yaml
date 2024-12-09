@@ -8,15 +8,9 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: postgresql
-    targetRevision: 14.8.0 # Use the latest PostgreSQL chart version
+    targetRevision: 14 # Use the latest version
     helm:
       values: |
-        global:
-          postgresql:
-            postgresqlPostgresqlConfiguration: # Include additional configuration for pg_cron
-              shared_preload_libraries: pg_cron
-              cron.database_name: mydatabase
-
         auth:
           postgresPassword: mypassword
           username: myuser
@@ -24,12 +18,8 @@ spec:
           database: mydatabase
 
         primary:
-          extraEnvVars:
-            - name: PGCRON_SCHEDULE
-              value: "* * * * *"
-            - name: PGCRON_COMMAND
-              value: "INSERT INTO mytable (content) VALUES ('Row created at ' || NOW());"
-
+          postgresqlPostgresqlConfiguration:
+            shared_preload_libraries: pg_cron
           initdbScripts:
             setup.sql: |
               CREATE TABLE IF NOT EXISTS mytable (
@@ -39,11 +29,16 @@ spec:
               );
               CREATE EXTENSION IF NOT EXISTS pg_cron;
 
+          extraEnvVars:
+            - name: PGCRON_SCHEDULE
+              value: "* * * * *"
+            - name: PGCRON_COMMAND
+              value: "INSERT INTO mytable (content) VALUES ('Row created at ' || NOW());"
+
         persistence:
           enabled: true
           size: 10Gi
           storageClass: gp2
-
   destination:
     namespace: database
     server: https://kubernetes.default.svc
