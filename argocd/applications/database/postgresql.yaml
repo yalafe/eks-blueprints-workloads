@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: postgresql
-    targetRevision: "14" # Ensure this is a string
+    targetRevision: "12" # Ensure this is a string
     helm:
       values: |
         auth:
