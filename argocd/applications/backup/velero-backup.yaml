@@ -27,3 +27,20 @@ spec:
   template:
     includedNamespaces:
     - database
+---
+
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: database-backup-minute
+  namespace: velero
+spec:
+  schedule: "* * * * *"  # Every minute
+  template:
+    includedNamespaces:
+      - database
+    ttl: 24h  # Backups will be retained for 24 hours
+    storageLocation: default  # Backup storage location name
+    volumeSnapshotLocations:
+      - default  # Volume snapshot location name
+
