@@ -17,7 +17,7 @@ spec:
             - -c
             - >
               latest_backup=$(velero backup get -o json | jq -r '.items | sort_by(.metadata.creationTimestamp) | last(.[]).metadata.name');
-              velero restore create --from-backup $latest_backup --namespace-mappings database=restore --include-namespaces database --overwrite;
+              velero restore create --from-backup $latest_backup --namespace-mappings database=restored --include-namespaces database --overwrite;
             env:
             - name: VELERO_BACKUP_STORAGE_LOCATION
               value: default
