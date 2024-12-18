@@ -1,0 +1,20 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: postgresql-backup-schedule
+  namespace: velero
+spec:
+  schedule: "*/1 * * * *" # Cron schedule for every minute
+  template:
+    ttl: 72h # Backups will be retained for 72 hours
+    includedNamespaces:
+      - database
+    includedResources:
+      - pods
+      - persistentvolumeclaims
+      - persistentvolumes
+    labelSelector:
+      matchLabels:
+        app: postgresql
+    snapshotVolumes: true # Enable volume snapshotting
+    storageLocation: default # Specify the backup storage location
