@@ -4,7 +4,7 @@ metadata:
   name: velero-restore-job
   namespace: velero
 spec:
-  schedule: "*/5 * * * *"  # Every 5 minutes
+  schedule: "*/2 * * * *"  # Every 2 minutes
   jobTemplate:
     spec:
       template:
