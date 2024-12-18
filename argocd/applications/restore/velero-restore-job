@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: velero-restore-job
+  namespace: velero
+spec:
+  schedule: "*/5 * * * *"  # Every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: velero-restore
+            image: velero/velero:latest
+            command:
+            - /bin/sh
+            - -c
+            - >
+              latest_backup=$(velero backup get -o json | jq -r '.items | sort_by(.metadata.creationTimestamp) | last(.[]).metadata.name');
+              velero restore create --from-backup $latest_backup --namespace-mappings database=restore --include-namespaces database --overwrite;
+            env:
+            - name: VELERO_BACKUP_STORAGE_LOCATION
+              value: default
+            - name: VELERO_NAMESPACE
+              value: velero
+          restartPolicy: Never
+          serviceAccountName: velero
+      backoffLimit: 1
