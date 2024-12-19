@@ -1,28 +1,23 @@
 apiVersion: batch/v1
-kind: CronJob
+kind: Job
 metadata:
-  name: velero-restore-job
+  name: restore-mydatabase2
   namespace: velero
 spec:
-  schedule: "*/2 * * * *"  # Every 2 minutes
-  jobTemplate:
+  template:
     spec:
-      template:
-        spec:
-          containers:
-          - name: velero-restore
-            image: velero/velero:latest
-            command:
-            - /bin/sh
-            - -c
-            - >
-              latest_backup=$(velero backup get -o json | jq -r '.items | sort_by(.metadata.creationTimestamp) | last(.[]).metadata.name');
-              velero restore create --from-backup $latest_backup --namespace-mappings database=restored --include-namespaces database --overwrite;
-            env:
-            - name: VELERO_BACKUP_STORAGE_LOCATION
-              value: default
-            - name: VELERO_NAMESPACE
-              value: velero
-          restartPolicy: Never
-          serviceAccountName: velero
-      backoffLimit: 1
+      containers:
+      - name: velero-restore
+        image: velero/velero:latest
+        command: ["velero"]
+        args:
+          - "restore"
+          - "create"
+          - "--from-backup=postgresql-backup-schedule-20241219072549" # Replace with Velero backup name or use a variable
+          - "--namespace-mappings=database:database"
+          - "--include-namespaces=database"
+          - "--wait"
+        env:
+          - name: RESTORE_TARGET
+            value: "mydatabase2" # New target database name
+      restartPolicy: Never
